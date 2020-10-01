@@ -7,9 +7,6 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 
-const validateRegisterInput = require('../../validations/register')
-const validateLoginInput = require('../../validations/login');
-
 router.get('/fetchall', async(req, res) => {
     try {
         var userProfile= await UserModel.find();

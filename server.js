@@ -7,7 +7,6 @@ const cors = require('cors')
 
 const db = require('./config/keys').MONGO_KEY;
 
-const LeaveRoute = require('./routes/api/leave')
 const UsersRoute = require('./routes/api/users');
 
 app.use(cors());
