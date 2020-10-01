@@ -59,7 +59,7 @@ export default class Login extends Component {
       return <Redirect to='/leave'/>
     }
     return (
-      <Container component="main" maxWidth="xs">
+      <Container className='Container' component="main" maxWidth="xs">
         <CssBaseline />
         <div className={'paper'}>
           <Avatar className={'avatar'}>
