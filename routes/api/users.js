@@ -7,16 +7,21 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 
+const validateRegisterInput = require('../../validations/register')
+const validateLoginInput = require('../../validations/login');
+const LeaveModel = require('../../model/Leaves');
+
 router.get('/fetchall', async(req, res) => {
     try {
         var userProfile= await UserModel.find();
+        var userLeave = await LeaveModel.find();
         var user = userProfile.map(eachuser=>{
             return {
                 _id: eachuser['_id'], name: eachuser['name'],
                 email: eachuser['email'], avatar: eachuser['avatar']
             }
         })
-        return res.status(200).json({user})
+        return res.status(200).json({user,userLeave})
     } catch (error) {
         console.log(error)
         return res.status(400).json(error)
@@ -25,6 +30,10 @@ router.get('/fetchall', async(req, res) => {
 })
 
 router.post('/register', (req, res) => {
+    const { errors, isValid } = validateRegisterInput(req.body)
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
     UserModel.findOne({ email: req.body.email.toLowerCase() })
         .then(user => {
             if (user) {
@@ -57,6 +66,11 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
+
+    const { errors, isValid } = validateLoginInput(req.body)
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
     const email = req.body.email.toLowerCase();
     const password = req.body.password.toString();
     UserModel.findOne({ email: email })
