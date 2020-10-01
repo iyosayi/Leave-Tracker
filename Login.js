@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import './Login.css';
+import './login.css';
 import axios from 'axios'
 import { Router,Redirect } from 'react-router-dom';
 
@@ -59,7 +59,7 @@ export default class Login extends Component {
       return <Redirect to='/leave'/>
     }
     return (
-      <Container component="main" maxWidth="xs">
+      <Container className='Container' component="main" maxWidth="xs">
         <CssBaseline />
         <div className={'paper'}>
           <Avatar className={'avatar'}>
