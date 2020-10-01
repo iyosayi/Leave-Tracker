@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import './Login.css';
+import React, { Component } from 'react'
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import TextField from '@material-ui/core/TextField'
+import Link from '@material-ui/core/Link'
+import Box from '@material-ui/core/Box'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Typography from '@material-ui/core/Typography'
+import Container from '@material-ui/core/Container'
+import './Login.css'
 import axios from 'axios'
-import { Router,Redirect } from 'react-router-dom';
+import { Router, Redirect } from 'react-router-dom'
 
 function Copyright() {
   return (
@@ -22,7 +22,7 @@ function Copyright() {
       {new Date().getFullYear()}
       {'.'}
     </Typography>
-  );
+  )
 }
 
 export default class Login extends Component {
@@ -36,17 +36,18 @@ export default class Login extends Component {
   }
 
   handleInputChange = (event) => {
-    const target = event.target;
-    const name = target.name;
+    const target = event.target
+    const name = target.name
     const value = target.value
     this.setState({
       [name]: value
     })
   }
   handleFormSubmit = (event) => {
-    event.preventDefault();
-    axios.post('http://localhost:5000/api/user/login', this.state)
-      .then(response => {
+    event.preventDefault()
+    axios
+      .post('http://localhost:5000/api/user/login', this.state)
+      .then((response) => {
         console.log(response.data.success)
         if (response.data.success) {
           this.setState({ redirect: '/leave' })
@@ -55,8 +56,8 @@ export default class Login extends Component {
   }
 
   render() {
-    if(this.state.redirect!=null){
-      return <Redirect to='/leave'/>
+    if (this.state.redirect != null) {
+      return <Redirect to="/leave" />
     }
     return (
       <Container component="main" maxWidth="xs">
@@ -67,7 +68,7 @@ export default class Login extends Component {
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
-        </Typography>
+          </Typography>
           <form className={'form'} onSubmit={this.handleFormSubmit} noValidate>
             <TextField
               variant="outlined"
@@ -93,20 +94,15 @@ export default class Login extends Component {
               autoComplete="current-password"
               onChange={this.handleInputChange}
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-            >
+            <Button type="submit" fullWidth variant="contained" color="primary">
               Sign In
-          </Button>
+            </Button>
           </form>
         </div>
         <Box mt={8}>
           <Copyright />
         </Box>
       </Container>
-    );
+    )
   }
 }
